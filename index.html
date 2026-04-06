@@ -49,12 +49,12 @@ h2, h3 {
 
 <script>
 
-// 🎵 Start music on click (browser-safe)
+// 🎵 music start
 function startMusic(){
   document.getElementById("bgMusic").play();
 }
 
-// ✨ Typing effect
+// ✨ typing effect
 function typeText(id, text, speed = 50){
   let i = 0;
   let el = document.getElementById(id);
@@ -70,12 +70,12 @@ function typeText(id, text, speed = 50){
   typing();
 }
 
-// 🎬 Start message
+// 🎬 start message
 window.onload = function(){
   typeText("question", "Hey Samiha, do you know what today is?", 60);
 };
 
-// 🎯 Answer logic
+// 🎯 answer logic
 function answer(choice){
   if(choice === "no"){
     typeText("question", "Come on Samiha... it's your birthday!", 60);
@@ -86,24 +86,24 @@ function answer(choice){
   }
 }
 
-// 🎁 Gift step
+// 🎁 gift box
 function gift(){
   document.getElementById("content").innerHTML =
   '<h3>Opening your gift...</h3>' +
-  '<img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Gift_box_icon.png" width="150"><br><br>' +
+  '<img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/gift-1296587_960_720.png" width="150"><br><br>' +
   '<button onclick="final()">Open it</button>';
 }
 
-// 🎉 Final step
+// 🧸 final teddy
 function final(){
   typeText("question", "HAPPY BIRTHDAY SAMIHA!", 70);
   document.getElementById("options").innerHTML = "";
   document.getElementById("content").innerHTML =
   '<h2>Your teddy is here!</h2>' +
-  '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Teddy_bear_icon.png/512px-Teddy_bear_icon.png" width="150">';
+  '<img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/teddy-bear-2026655_960_720.png" width="200">';
 }
 
-// 🎊 Confetti
+// 🎊 confetti
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
