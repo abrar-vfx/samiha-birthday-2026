@@ -85,48 +85,15 @@ function answer(choice){
 function gift(){
   document.getElementById("content").innerHTML =
   '<h3>Opening your gift...</h3>' +
-  '<div style="font-size:100px">🎁</div><br>' +
+  '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gift_box_icon.png/512px-Gift_box_icon.png" width="150"><br><br>' +
   '<button onclick="final()">Open it</button>';
 }
 
-// final teddy (NO IMAGE, PURE EMOJI)
+// final teddy (REAL + BACKUP)
 function final(){
   typeText("question", "HAPPY BIRTHDAY SAMIHA!", 70);
   document.getElementById("options").innerHTML = "";
+
   document.getElementById("content").innerHTML =
   '<h2>Your teddy is here!</h2>' +
-  '<div class="teddy">🧸</div>';
-}
-
-// confetti
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let pieces = [];
-for(let i=0;i<100;i++){
-  pieces.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    size: Math.random()*8+4,
-    speed: Math.random()*3+2
-  });
-}
-
-function update(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  pieces.forEach(p=>{
-    ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,50%)";
-    ctx.fillRect(p.x,p.y,p.size,p.size);
-    p.y += p.speed;
-    if(p.y > canvas.height) p.y = 0;
-  });
-  requestAnimationFrame(update);
-}
-update();
-
-</script>
-
-</body>
-</html>
+  '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Teddy_Bear.png/512px-Teddy_Bear.png" width="200" onerror="this.style
