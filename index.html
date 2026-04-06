@@ -1,28 +1,31 @@
-samiha-birthday-2026<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Happy Birthday Samiha 🎂</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
 <style>
 body {
   text-align: center;
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(to right, #ffccff, #ccffff);
   overflow: hidden;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 22px;
   font-size: 18px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
-  background: #ff66b2;
+  background: #ff4da6;
   color: white;
+  cursor: pointer;
 }
 
 h2, h3 {
-  color: #ff3399;
+  color: #cc0066;
 }
 </style>
 </head>
@@ -32,30 +35,34 @@ h2, h3 {
 <h2 id="question"></h2>
 
 <div id="options">
-  <button onclick="answer('yes')">Yes</button>
-  <button onclick="answer('no')">No</button>
+  <button onclick="startMusic(); answer('yes')">Yes</button>
+  <button onclick="startMusic(); answer('no')">No</button>
 </div>
 
 <div id="content"></div>
 
-<!-- 🎵 Music -->
-<audio autoplay loop>
-  <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mid">
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
-<!-- 🎊 Confetti -->
 <canvas id="confetti"></canvas>
 
 <script>
 
-// ✨ Typing Effect
-function typeText(elementId, text, speed = 50) {
+// 🎵 Start music on click (browser-safe)
+function startMusic(){
+  document.getElementById("bgMusic").play();
+}
+
+// ✨ Typing effect
+function typeText(id, text, speed = 50){
   let i = 0;
-  document.getElementById(elementId).innerHTML = "";
-  
-  function typing() {
-    if (i < text.length) {
-      document.getElementById(elementId).innerHTML += text.charAt(i);
+  let el = document.getElementById(id);
+  el.innerHTML = "";
+
+  function typing(){
+    if(i < text.length){
+      el.innerHTML += text.charAt(i);
       i++;
       setTimeout(typing, speed);
     }
@@ -63,59 +70,62 @@ function typeText(elementId, text, speed = 50) {
   typing();
 }
 
-// 🎬 Start typing on load
-window.onload = function() {
-  typeText("question", "Hey Samiha, do u know what's today? 🤔", 60);
+// 🎬 Start message
+window.onload = function(){
+  typeText("question", "Hey Samiha, do you know what today is?", 60);
 };
 
 // 🎯 Answer logic
 function answer(choice){
-  if(choice === 'no'){
-    typeText("question", "Uff 🤦 Samiha, it's your birthday 🎂", 60);
-    document.getElementById('options').innerHTML =
-    '<button onclick="gift()">Want to get a gift? 🎁</button>';
+  if(choice === "no"){
+    typeText("question", "Come on Samiha... it's your birthday!", 60);
+    document.getElementById("options").innerHTML =
+      '<button onclick="gift()">Want your gift?</button>';
   } else {
     final();
   }
 }
 
-// 🎁 Gift scene
+// 🎁 Gift step
 function gift(){
-  document.getElementById('content').innerHTML =
-  '<h3>🎁 Opening gift box...</h3><img src="https://i.imgur.com/6X4Xx7U.gif"><br><br><button onclick="final()">Take it ❤️</button>';
+  document.getElementById("content").innerHTML =
+  '<h3>Opening your gift...</h3>' +
+  '<img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Gift_box_icon.png" width="150"><br><br>' +
+  '<button onclick="final()">Open it</button>';
 }
 
-// 🎉 Final scene
+// 🎉 Final step
 function final(){
-  typeText("question", "🎉 A VERY VERY HAPPY BIRTHDAY SAMIHA 🎂🎈 🎉", 60);
-  document.getElementById('options').innerHTML = "";
-  document.getElementById('content').innerHTML =
-  '<h2>🧸 Here is your teddy bear!</h2><img src="https://i.imgur.com/OYVpe2W.png">';
+  typeText("question", "HAPPY BIRTHDAY SAMIHA!", 70);
+  document.getElementById("options").innerHTML = "";
+  document.getElementById("content").innerHTML =
+  '<h2>Your teddy is here!</h2>' +
+  '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Teddy_bear_icon.png/512px-Teddy_bear_icon.png" width="150">';
 }
 
-// 🎊 Confetti animation
-const canvas = document.getElementById('confetti');
-const ctx = canvas.getContext('2d');
+// 🎊 Confetti
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let pieces = [];
-for (let i = 0; i < 120; i++) {
+for(let i=0;i<100;i++){
   pieces.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    size: Math.random() * 10 + 5,
-    speed: Math.random() * 3 + 2
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    size: Math.random()*8+4,
+    speed: Math.random()*3+2
   });
 }
 
-function update() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  pieces.forEach(p => {
+function update(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pieces.forEach(p=>{
     ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,50%)";
-    ctx.fillRect(p.x, p.y, p.size, p.size);
+    ctx.fillRect(p.x,p.y,p.size,p.size);
     p.y += p.speed;
-    if (p.y > canvas.height) p.y = 0;
+    if(p.y > canvas.height) p.y = 0;
   });
   requestAnimationFrame(update);
 }
@@ -124,3 +134,4 @@ update();
 </script>
 
 </body>
+</html>
