@@ -27,6 +27,10 @@ button {
 h2, h3 {
   color: #cc0066;
 }
+
+.teddy {
+  font-size: 120px;
+}
 </style>
 </head>
 
@@ -35,26 +39,17 @@ h2, h3 {
 <h2 id="question"></h2>
 
 <div id="options">
-  <button onclick="startMusic(); answer('yes')">Yes</button>
-  <button onclick="startMusic(); answer('no')">No</button>
+  <button onclick="answer('yes')">Yes</button>
+  <button onclick="answer('no')">No</button>
 </div>
 
 <div id="content"></div>
-
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
 
 <canvas id="confetti"></canvas>
 
 <script>
 
-// 🎵 music start
-function startMusic(){
-  document.getElementById("bgMusic").play();
-}
-
-// ✨ typing effect
+// typing effect
 function typeText(id, text, speed = 50){
   let i = 0;
   let el = document.getElementById(id);
@@ -70,12 +65,12 @@ function typeText(id, text, speed = 50){
   typing();
 }
 
-// 🎬 start message
+// start
 window.onload = function(){
   typeText("question", "Hey Samiha, do you know what today is?", 60);
 };
 
-// 🎯 answer logic
+// answer
 function answer(choice){
   if(choice === "no"){
     typeText("question", "Come on Samiha... it's your birthday!", 60);
@@ -86,24 +81,24 @@ function answer(choice){
   }
 }
 
-// 🎁 gift box
+// gift
 function gift(){
   document.getElementById("content").innerHTML =
   '<h3>Opening your gift...</h3>' +
-  '<img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/gift-1296587_960_720.png" width="150"><br><br>' +
+  '<div style="font-size:100px">🎁</div><br>' +
   '<button onclick="final()">Open it</button>';
 }
 
-// 🧸 final teddy
+// final teddy (NO IMAGE, PURE EMOJI)
 function final(){
   typeText("question", "HAPPY BIRTHDAY SAMIHA!", 70);
   document.getElementById("options").innerHTML = "";
   document.getElementById("content").innerHTML =
   '<h2>Your teddy is here!</h2>' +
-  '<img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/teddy-bear-2026655_960_720.png" width="200">';
+  '<div class="teddy">🧸</div>';
 }
 
-// 🎊 confetti
+// confetti
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
