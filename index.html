@@ -1,101 +1,357 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Happy Birthday Samiha 🎂</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
 <style>
-body {
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #ffccff, #ccffff);
-  overflow: hidden;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
-button {
-  padding: 12px 22px;
-  font-size: 18px;
-  margin: 10px;
-  border-radius: 12px;
-  border: none;
-  background: #ff4da6;
-  color: white;
-  cursor: pointer;
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#f8c6ff,#c9f5ff);
+overflow:hidden;
+text-align:center;
 }
 
-h2, h3 {
-  color: #cc0066;
+.box{
+background:white;
+padding:35px;
+width:90%;
+max-width:420px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 
-.teddy {
-  font-size: 120px;
+h1{
+color:#ff3f88;
+margin-bottom:20px;
 }
+
+button{
+
+padding:12px 22px;
+
+border:none;
+
+border-radius:25px;
+
+margin:8px;
+
+background:#ff4f98;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+}
+
+.hidden{
+display:none;
+}
+
+#final{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
+background:
+linear-gradient(
+180deg,
+#ff75b5,
+#ffd86b
+);
+
+}
+
+.note{
+
+font-size:28px;
+
+padding:25px;
+
+}
+
+.cake{
+
+font-size:120px;
+
+animation:bounce 1.5s infinite;
+
+}
+
+.star{
+
+position:absolute;
+
+font-size:28px;
+
+animation:up 5s linear infinite;
+
+}
+
+.confetti{
+
+position:absolute;
+
+width:10px;
+
+height:10px;
+
+animation:fall 4s linear infinite;
+
+}
+
+@keyframes bounce{
+
+50%{
+transform:
+translateY(-18px);
+}
+
+}
+
+@keyframes up{
+
+0%{
+transform:
+translateY(100vh);
+}
+
+100%{
+transform:
+translateY(-100px);
+}
+
+}
+
+@keyframes fall{
+
+0%{
+transform:
+translateY(-20px);
+}
+
+100%{
+transform:
+translateY(100vh);
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h2 id="question"></h2>
+<div
+class="box"
+id="page1">
 
-<div id="options">
-  <button onclick="answer('yes')">Yes</button>
-  <button onclick="answer('no')">No</button>
+<h1>
+Hey SAMIHA!<br>
+Do u know what's today?
+</h1>
+
+<button
+onclick="yesTap()">
+Yes
+</button>
+
+<button
+onclick="goNext()">
+No
+</button>
+
+<p id="text1"></p>
+
 </div>
 
-<div id="content"></div>
 
-<canvas id="confetti"></canvas>
+<div
+class="box hidden"
+id="page2">
+
+<h1>
+It's ur birthday 🎇🎂
+</h1>
+
+<button
+onclick="endTap()">
+Want to end
+</button>
+
+<button
+onclick="gift()">
+Want the gift
+</button>
+
+<p id="text2"></p>
+
+</div>
+
+
+<div id="final">
+
+<div class="cake">
+🎁🎂✨
+</div>
+
+<div class="note">
+Happy birthday to u and many many returns of the day 💖
+</div>
+
+</div>
+
 
 <script>
 
-// typing effect
-function typeText(id, text, speed = 50){
-  let i = 0;
-  let el = document.getElementById(id);
-  el.innerHTML = "";
+function yesTap(){
 
-  function typing(){
-    if(i < text.length){
-      el.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
-    }
-  }
-  typing();
+document
+.getElementById(
+"text1"
+)
+.innerHTML=
+"Think again 😏";
+
 }
 
-// start
-window.onload = function(){
-  typeText("question", "Hey Samiha, do you know what today is?", 60);
-};
+function goNext(){
 
-// answer
-function answer(choice){
-  if(choice === "no"){
-    typeText("question", "Come on Samiha... it's your birthday!", 60);
-    document.getElementById("options").innerHTML =
-      '<button onclick="gift()">Want your gift?</button>';
-  } else {
-    final();
-  }
+page1
+.classList
+.add(
+"hidden"
+);
+
+page2
+.classList
+.remove(
+"hidden"
+);
+
 }
 
-// gift
+function endTap(){
+
+document
+.getElementById(
+"text2"
+)
+.innerHTML=
+"Why! First take ur gift 🎁";
+
+}
+
 function gift(){
-  document.getElementById("content").innerHTML =
-  '<h3>Opening your gift...</h3>' +
-  '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gift_box_icon.png/512px-Gift_box_icon.png" width="150"><br><br>' +
-  '<button onclick="final()">Open it</button>';
+
+page2
+.classList
+.add(
+"hidden"
+);
+
+final
+.style
+.display=
+"flex";
+
+for(
+let i=0;
+i<80;
+i++
+){
+
+let c=
+document
+.createElement(
+"div"
+);
+
+c.className=
+"confetti";
+
+c.style.left=
+Math.random()*100
++"vw";
+
+c.style.background=
+`hsl(
+${Math.random()*360},
+100%,
+60%
+)`;
+
+c.style.animationDuration=
+(
+Math.random()*3
++2
+)
++"s";
+
+document.body
+.appendChild(c);
+
 }
 
-// final teddy (REAL + BACKUP)
-function final(){
-  typeText("question", "HAPPY BIRTHDAY SAMIHA!", 70);
-  document.getElementById("options").innerHTML = "";
+for(
+let i=0;
+i<30;
+i++
+){
 
-  document.getElementById("content").innerHTML =
-  '<h2>Your teddy is here!</h2>' +
-  '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Teddy_Bear.png/512px-Teddy_Bear.png" width="200" onerror="this.style
+let s=
+document
+.createElement(
+"div"
+);
 
-  
+s.className=
+"star";
+
+s.innerHTML=
+"⭐";
+
+s.style.left=
+Math.random()*100
++"vw";
+
+document.body
+.appendChild(s);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
